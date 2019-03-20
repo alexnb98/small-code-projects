@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        class App extends React.Component {
+            state = {
+                "name": 'Alex',
+                "age": 21
+            }
+            clickHandler = (e) => {
+                console.log(e.target);
+                this.setState({
+                    name: "Sebastian",
+                    age: 18
+                })
+            }
+
+            changeHandler = (e) => {
+                this.setState({
+                    name: e.target.value
+                });
+            }
+
+            handleSubmit = (e) => {
+                e.preventDefault();
+                console.log("Form submitted ", this.state.name)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h1> Hey bitches!</h1>
+                        <p>My name is: { this.state.name } and I am { this.state.age } years old</p>
+                        <button onClick={this.clickHandler}>Click Me</button>
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" onChange={this.changeHandler}/>
+                            <button>Submit</button>
+                        </form>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<App />, document.getElementById('app'));
+    
+    </script>
+    
+</body>
+</html>
