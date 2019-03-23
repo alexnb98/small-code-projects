@@ -9,11 +9,11 @@ export default class BurgerIngredients extends Component {
 			case 'bread-bottom':
 				ingredient = <div className={classes.BreadBottom} />;
 				break;
-			case 'breat-top':
+			case 'bread-top':
 				ingredient = (
 					<div className={classes.BreadTop}>
-						<div className={classes.Seads1} />
-						<div className={classes.Seads2} />
+						<div className={classes.Seeds1} />
+						<div className={classes.Seeds2} />
 					</div>
 				);
 				break;
