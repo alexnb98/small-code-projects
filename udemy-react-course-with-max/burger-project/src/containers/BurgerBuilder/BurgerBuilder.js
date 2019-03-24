@@ -79,6 +79,7 @@ export default class BurgerBuilder extends Component {
 			<React.Fragment>
 				<Modal closeModal={this.closeModalHandler} show={this.state.purchasing}>
 					<OrderSummary
+						price={this.state.totalPrice}
 						purchaseCancel={this.closeModalHandler}
 						purchaseContinue={this.purchaseContinueHandler}
 						ingredients={this.state.ingredients}
