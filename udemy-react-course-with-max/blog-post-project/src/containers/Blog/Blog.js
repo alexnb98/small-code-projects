@@ -1,51 +1,45 @@
 import React, { Component } from 'react';
+// import axios from 'axios';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
-import axios from '../../axios';
+import Posts from './Posts/Posts';
+import NewPost from './NewPost/NewPost';
+import FullPost from './FullPost/FullPost';
 
 class Blog extends Component {
-	state = {
-		posts: [],
-		selectedPostId: null
-	};
-
-	componentDidMount() {
-		axios.get('/posts').then((response) => {
-			const posts = response.data.slice(0, 4);
-			const updatedPosts = posts.map((post) => {
-				return { ...post, author: 'Alexander' };
-			});
-			this.setState({ posts: updatedPosts });
-		});
-	}
-
-	selectedPostHandler = (id) => {
-		this.setState({ selectedPostId: id });
-	};
-
 	render() {
-		const posts = this.state.posts.map((post) => {
-			return (
-				<Post
-					key={post.id}
-					title={post.title}
-					author={post.author}
-					clicked={this.selectedPostHandler.bind(this, post.id)}
-				/>
-			);
-		});
 		return (
-			<div>
-				<section className="Posts">{posts}</section>
-				<section>
-					<FullPost id={this.state.selectedPostId} />
-				</section>
-				<section>
-					<NewPost />
-				</section>
+			<div className="Blog">
+				<header>
+					<nav>
+						<ul>
+							<li>
+								<NavLink to="/" exact activeClassName="active">
+									Home
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to={{
+										pathname: '/new-post',
+										hash: '#submit',
+										search: '?quick-submit=true'
+									}}
+								>
+									New Post
+								</NavLink>
+							</li>
+						</ul>
+					</nav>
+				</header>
+				{/* <Route path="/" exact render={() => <h1>Home</h1>} />
+                <Route path="/" render={() => <h1>Home 2</h1>} /> */}
+				<Switch>
+					<Route path="/" exact component={Posts} />
+					<Route path="/new-post" component={NewPost} />
+					<Route path="/:id" component={FullPost} />
+				</Switch>
 			</div>
 		);
 	}
