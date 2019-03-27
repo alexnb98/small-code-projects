@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styles from './NavigationItems.module.css';
 
 export default function NavigationItems() {
@@ -6,12 +7,19 @@ export default function NavigationItems() {
 		<div>
 			<ul className={styles.NavigationItems}>
 				<li className={styles.NavigationItem}>
-					<a className={styles.active} href="/">
+					<NavLink activeClassName={styles.active} to="/" exact>
 						Burger Builder
-					</a>
+					</NavLink>
 				</li>
 				<li className={styles.NavigationItem}>
-					<a href="/">Checkout</a>
+					<NavLink activeClassName={styles.active} to="/orders" exact>
+						Orders
+					</NavLink>
+				</li>
+				<li className={styles.NavigationItem}>
+					<NavLink activeClassName={styles.active} to="/checkout">
+						Checkout
+					</NavLink>
 				</li>
 			</ul>
 		</div>
