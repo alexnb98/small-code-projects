@@ -13,7 +13,7 @@ export default function BurgerControls(props) {
 	return (
 		<div className={styles.BuildControls}>
 			<p>
-				Price: <strong>{props.price.toFixed(2)}$</strong>
+				Price: <strong>{props.price}$</strong>
 			</p>
 			{controls.map((ctrl) => (
 				<BurgerControl

@@ -5,6 +5,10 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/order';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import { purchaseBurger } from './../../../store/actions/order';
 
 class ContactData extends Component {
 	state = {
@@ -75,15 +79,8 @@ class ContactData extends Component {
 			price: this.props.price,
 			orderData: formData
 		};
-		axios
-			.post('/orders.json', order)
-			.then((response) => {
-				this.setState({ loading: false });
-				this.props.history.push('/');
-			})
-			.catch((error) => {
-				this.setState({ loading: false });
-			});
+
+		this.props.onOrder(order);
 	};
 
 	inputChangedHandler = (event, inputIdentifier) => {
@@ -132,4 +129,17 @@ class ContactData extends Component {
 	}
 }
 
-export default ContactData;
+const mapStateToProps = (state) => {
+	return {
+		ingredients: state.ingredients,
+		price: state.totalPrice
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onOrder: (order) => dispatch(actions.purchaseBurger(order))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

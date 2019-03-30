@@ -15,7 +15,7 @@ export default function orderSummary(props) {
 			<p>You have ordered a burger with this ingredients: </p>
 			<ul>{ingList}</ul>
 			<p>
-				<strong>Total Price: {props.price.toFixed(2)}$</strong>
+				<strong>Total Price: {props.price}$</strong>
 			</p>
 			<Button btnType="Danger" clicked={props.purchaseCancel}>
 				CANCEL
