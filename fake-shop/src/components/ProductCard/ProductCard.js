@@ -2,18 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ProductCard.module.css';
 
-export default function ProductCard() {
+export default function ProductCard(props) {
 	return (
-		<div className="card shadow">
-			<Link to="/product/4">
-				<img className="card-img-top" src="http://lorempixel.com/640/480/business" alt="Card-Id" />
+		<div className="card shadow h-100">
+			<Link to={'/product/' + props.id}>
+				<img className="card-img-top" src={props.image} alt={props.title} />
 			</Link>
-			<div className="card-body position-relative">
+			<div className="card-body position-relative h-100">
 				<div className={styles.Price + ' bg-primary text-white px-3 py-1 rounded shadow text-center'}>
-					<p className="mb-0">25$</p>
+					<p className="mb-0">{props.price}$</p>
 				</div>
-				<h4 className="card-title">Product Title</h4>
-				<p className="card-text">Omnis adipisci consequuntur illum inventore id esse sit id fugit.</p>
+				<h4 className="card-title">{props.title}</h4>
+				<p className="card-text">{props.description}</p>
 			</div>
 		</div>
 	);

@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './ShopingCartProduct.module.css';
 
-export default function ShopingCartProduct() {
+export default function ShopingCartProduct(props) {
 	return (
 		<div className="d-flex flex-wrap my-5 shadow-sm position-relative">
-			<div className={styles.Close} />
+			<div onClick={props.click} className={styles.Close} />
 			<div className="col-3 pl-0">
-				<img className="img-fluid rounded shadow" src="http://lorempixel.com/640/480/business" alt="Card-Id" />
+				<img className="img-fluid rounded shadow" src={props.image} alt={props.title} />
 			</div>
 			<div className="col-6 py-3">
-				<h4 className="mb-2">Product Title</h4>
+				<h4 className="mb-2">{props.title}</h4>
 				<hr />
 				<div className="d-flex align-items-center">
 					<p>Color</p>
@@ -21,7 +21,7 @@ export default function ShopingCartProduct() {
 					<p className="mb-0">Quantity: 3</p>
 				</div>
 				<div className="rounded border p-3">
-					<p className="mb-0">Price: 25$</p>
+					<p className="mb-0">Price: {props.price}$</p>
 				</div>
 			</div>
 		</div>

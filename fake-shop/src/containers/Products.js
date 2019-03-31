@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import ProductCard from './../components/ProductCard/ProductCard';
+import * as actions from '../store/actions/actions';
+import { connect } from 'react-redux';
 
-export default class Products extends Component {
+class Products extends Component {
+	componentDidMount() {
+		this.props.onFetchProducts();
+	}
+
 	render() {
+		let products = this.props.products.map((product) => {
+			return (
+				<div className="col-md-4 my-3" key={product.id}>
+					<ProductCard
+						title={product.title}
+						id={product.id}
+						description={product.description}
+						image={product.image}
+						price={product.price}
+					/>
+				</div>
+			);
+		});
+
 		return (
 			<div>
 				<div className="jumbotron">
@@ -16,13 +36,23 @@ export default class Products extends Component {
 				</div>
 
 				<div className="container my-5">
-					<div className="row">
-						<div className="col-md-4">
-							<ProductCard />
-						</div>
-					</div>
+					<div className="row">{products}</div>
 				</div>
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		products: state.products
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onFetchProducts: () => dispatch(actions.fetchProducts())
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
