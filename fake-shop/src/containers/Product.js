@@ -6,8 +6,31 @@ import SelectPill from '../components/Pills/SelectPill';
 import * as actions from '../store/actions/actions';
 
 class Product extends Component {
-	removeProduct = (id) => {
-		this.props.removeItem(id);
+	state = {
+		product: {
+			id: null,
+			color: '',
+			number: 1
+		}
+	};
+
+	componentDidMount() {
+		const product = { ...this.state.product };
+		product.id = this.props.match.params.id;
+		this.setState({ product });
+	}
+
+	numberChangeHandler = (event) => {
+		const number = Number(event.target.value);
+		this.setState((state) => {
+			return { product: { ...state.product, number } };
+		});
+	};
+
+	colorSelectHandler = (color) => {
+		this.setState((state) => {
+			return { product: { ...state.product, color } };
+		});
 	};
 
 	render() {
@@ -15,6 +38,7 @@ class Product extends Component {
 		const product = this.props.products.find((item) => {
 			return productId === item.id;
 		});
+		const purchesable = !!this.state.product.color;
 		let productComponent = <div className="my-5">FAIL</div>;
 		if (product) {
 			productComponent = (
@@ -27,26 +51,38 @@ class Product extends Component {
 						<Pill content={'Price: ' + product.price + '$'} />
 						<div className="d-flex mb-3">
 							{product.colors.map((item, i) => {
-								return <ColorPill color={item} key={i} />;
+								return (
+									<ColorPill
+										isSelected={item === this.state.product.color}
+										click={this.colorSelectHandler.bind(this, item)}
+										color={item}
+										key={i}
+									/>
+								);
 							})}
 						</div>
 						<div className="d-flex flex-wrap">
 							<div className="col-8 pl-0">
 								<button
-									onClick={() => this.props.onAddItem(product)}
+									disabled={!purchesable}
+									onClick={() => this.props.onAddItem({ ...this.state.product, ...product })}
 									className="btn btn-primary btn-lg btn-block"
 								>
 									BUY
 								</button>
 							</div>
 							<div className="col-4">
-								<button
+								{/* <button
 									onClick={() => this.props.onRemoveItem(product.id)}
 									className="btn btn-danger btn-lg btn-block"
 								>
 									REMOVE
-								</button>
-								{/* <SelectPill numbers={[ 1, 2, 3, 4, 5 ]} /> */}
+								</button> */}
+								<SelectPill
+									change={this.numberChangeHandler}
+									value={this.state.number}
+									numbers={[ 1, 2, 3, 4, 5 ]}
+								/>
 							</div>
 						</div>
 					</div>

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ShopingCartProduct.module.css';
 
 export default function ShopingCartProduct(props) {
+	const color = props.color;
 	return (
 		<div className="d-flex flex-wrap my-5 shadow-sm position-relative">
 			<div onClick={props.click} className={styles.Close} />
@@ -13,12 +14,12 @@ export default function ShopingCartProduct(props) {
 				<hr />
 				<div className="d-flex align-items-center">
 					<p>Color</p>
-					<div className="rounded ml-3" style={{ width: '3rem', height: '3rem', background: '#d92583' }} />
+					<div className="rounded ml-3" style={{ width: '3rem', height: '3rem', background: color }} />
 				</div>
 			</div>
 			<div className="col-3 d-flex flex-column justify-content-around pr-5">
 				<div className="rounded border p-3">
-					<p className="mb-0">Quantity: 3</p>
+					<p className="mb-0">Quantity: {props.number}</p>
 				</div>
 				<div className="rounded border p-3">
 					<p className="mb-0">Price: {props.price}$</p>

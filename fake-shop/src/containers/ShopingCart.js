@@ -29,6 +29,8 @@ class ShopingCart extends Component {
 						click={() => this.props.onRemoveItem(item.id)}
 						price={item.price}
 						image={item.image}
+						color={item.color}
+						number={item.number}
 					/>
 				);
 			});

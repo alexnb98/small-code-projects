@@ -17,14 +17,18 @@ const reducer = (state = initialState, action) => {
 		case actionTypes.ADD_ITEM:
 			const productIndex = state.cart.findIndex((obj) => obj.id === action.item.id);
 			if (productIndex !== -1) {
-				const cart = [ ...state.cart ];
-				cart[productIndex].number++;
-				return {
-					...state,
-					cart
-				};
+				if (state.cart[productIndex].color === action.item.color) {
+					const product = state.cart[productIndex];
+					product.number += action.item.number;
+					const cart = [ ...state.cart ];
+					cart[productIndex] = product;
+					return {
+						...state,
+						cart
+					};
+				}
 			}
-			const item = { ...action.item, number: 1 };
+			const item = { ...action.item };
 			return {
 				...state,
 				cart: state.cart.concat(item)

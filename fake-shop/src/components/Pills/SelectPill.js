@@ -6,5 +6,9 @@ export default function SelectPill(props) {
 			{item}
 		</option>
 	));
-	return <select className="form-control h-100">{options}</select>;
+	return (
+		<select onChange={props.change} value={props.value} className="form-control h-100">
+			{options}
+		</select>
+	);
 }
