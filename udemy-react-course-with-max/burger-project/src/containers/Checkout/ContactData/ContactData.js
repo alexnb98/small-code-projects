@@ -61,7 +61,7 @@ class ContactData extends Component {
 						{ value: 'cheapest', displayValue: 'Cheapest' }
 					]
 				},
-				value: ''
+				value: 'fastest'
 			}
 		},
 		loading: false
@@ -131,8 +131,8 @@ class ContactData extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		ingredients: state.ingredients,
-		price: state.totalPrice
+		ingredients: state.burgerBuilder.ingredients,
+		price: state.burgerBuilder.totalPrice
 	};
 };
 
