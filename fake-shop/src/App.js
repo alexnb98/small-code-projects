@@ -4,6 +4,7 @@ import Products from './containers/Products';
 import Product from './containers/Product';
 import ShopingCart from './containers/ShopingCart';
 import Navbar from './components/Navbar';
+import { connect } from 'react-redux';
 
 class App extends Component {
 	render() {
@@ -22,4 +23,8 @@ class App extends Component {
 	}
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+	inCartItems: state.cart.length
+});
+
+export default connect(mapStateToProps)(App);

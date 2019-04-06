@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import Pill from '../components/Pills/Pill';
 import { connect } from 'react-redux';
-import ColorPill from '../components/Pills/ColorPill';
 import SelectPill from '../components/Pills/SelectPill';
 import * as actions from '../store/actions/actions';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
 	state = {
 		product: {
 			id: null,
-			color: '',
 			number: 1
-		}
+		},
+		inCart: false
 	};
 
 	componentDidMount() {
@@ -27,19 +27,19 @@ class Product extends Component {
 		});
 	};
 
-	colorSelectHandler = (color) => {
-		this.setState((state) => {
-			return { product: { ...state.product, color } };
-		});
-	};
-
 	render() {
 		const productId = +this.props.match.params.id;
 		const product = this.props.products.find((item) => {
 			return productId === item.id;
 		});
-		const purchesable = !!this.state.product.color;
-		let productComponent = <div className="my-5">FAIL</div>;
+		let productComponent = (
+			<div className="my-5 alert alert-danger w-100 p-3" role="alert">
+				<p>Something went wrong.</p>
+				<Link className="alert-link" to="/">
+					Go to Home Page
+				</Link>
+			</div>
+		);
 		if (product) {
 			productComponent = (
 				<React.Fragment>
@@ -49,22 +49,9 @@ class Product extends Component {
 					<div className="col-md-6">
 						<Pill content={'Review Stars: ' + product.stars} />
 						<Pill content={'Price: ' + product.price + '$'} />
-						<div className="d-flex mb-3">
-							{product.colors.map((item, i) => {
-								return (
-									<ColorPill
-										isSelected={item === this.state.product.color}
-										click={this.colorSelectHandler.bind(this, item)}
-										color={item}
-										key={i}
-									/>
-								);
-							})}
-						</div>
 						<div className="d-flex flex-wrap">
-							<div className="col-8 pl-0">
+							<div className="col-4 pl-0">
 								<button
-									disabled={!purchesable}
 									onClick={() => this.props.onAddItem({ ...this.state.product, ...product })}
 									className="btn btn-primary btn-lg btn-block"
 								>
@@ -72,17 +59,19 @@ class Product extends Component {
 								</button>
 							</div>
 							<div className="col-4">
-								{/* <button
-									onClick={() => this.props.onRemoveItem(product.id)}
-									className="btn btn-danger btn-lg btn-block"
-								>
-									REMOVE
-								</button> */}
 								<SelectPill
 									change={this.numberChangeHandler}
 									value={this.state.number}
 									numbers={[ 1, 2, 3, 4, 5 ]}
 								/>
+							</div>
+							<div className="col-4">
+								<button
+									onClick={() => this.props.onRemoveItem(product.id)}
+									className="btn btn-danger btn-lg btn-block"
+								>
+									REMOVE
+								</button>
 							</div>
 						</div>
 					</div>
