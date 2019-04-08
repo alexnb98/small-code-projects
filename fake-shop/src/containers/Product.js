@@ -27,6 +27,10 @@ class Product extends Component {
 		});
 	};
 
+	ifInCartIndex = (id) => {
+		return this.props.cart.findIndex((item) => item.id === id);
+	};
+
 	render() {
 		const productId = +this.props.match.params.id;
 		const product = this.props.products.find((item) => {
@@ -40,7 +44,19 @@ class Product extends Component {
 				</Link>
 			</div>
 		);
+
 		if (product) {
+			const cartIndex = this.ifInCartIndex(product.id);
+			let itemInCart = <div className="alert alert-secondary">This item is not in your cart</div>;
+			if (cartIndex !== -1) {
+				itemInCart = (
+					<div className="alert alert-success">
+						This item is {this.props.cart[cartIndex].number}{' '}
+						{this.props.cart[cartIndex].number > 1 ? 'times' : 'time'} in your Cart
+					</div>
+				);
+			}
+
 			productComponent = (
 				<React.Fragment>
 					<div className="col-md-6">
@@ -73,6 +89,7 @@ class Product extends Component {
 									REMOVE
 								</button>
 							</div>
+							<div className="col-12 my-3 px-0">{itemInCart}</div>
 						</div>
 					</div>
 					<div className="col-12 my-3 mx-3 p-3 shadow">
@@ -94,7 +111,8 @@ class Product extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		products: state.products
+		products: state.orders.products,
+		cart: state.orders.cart
 	};
 };
 

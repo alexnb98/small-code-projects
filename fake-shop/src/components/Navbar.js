@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function navbar() {
+export default function navbar(props) {
+	let numberOfItems = null;
+	if (props.items > 0) {
+		numberOfItems = <span className="badge badge-danger">{props.items}</span>;
+	}
 	return (
 		<div className="py-2 bg-primary">
 			<div className="container">
@@ -12,8 +16,14 @@ export default function navbar() {
 						</NavLink>
 					</div>
 					<div>
-						<NavLink to="/cart" className="btn btn-light">
-							Cart <span className="badge badge-danger">4</span>
+						<NavLink to="/cart" className="btn btn-light mx-2">
+							Cart {numberOfItems}
+						</NavLink>
+						<NavLink to="login" className="btn btn-outline-light mx-2">
+							Login
+						</NavLink>
+						<NavLink to="signup" className="btn btn-outline-light mx-2">
+							Sign up
 						</NavLink>
 					</div>
 				</nav>

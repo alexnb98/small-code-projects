@@ -50,7 +50,7 @@ class ShopingCart extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		cartItems: state.cart
+		cartItems: state.orders.cart
 	};
 };
 
