@@ -1,5 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
+import { getFirebase } from 'react-redux-firebase';
+import { getFirestore } from 'redux-firestore';
 
 export const authStart = () => ({
 	type: actionTypes.AUTH_START
@@ -58,6 +60,26 @@ export const authLogin = (email, password) => {
 			.catch((error) => {
 				console.log('[authActions] error', error);
 				dispatch(authError(error));
+			});
+	};
+};
+
+export const createProduct = (product) => {
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		dispatch({ type: actionTypes.CREATE_PRODUCT_START });
+		const firestore = getFirestore();
+		firestore
+			.collection('products')
+			.add({
+				...product
+			})
+			.then((res) => {
+				console.log('[createProduct] response', res);
+				dispatch({ type: actionTypes.CREATE_PRODUCT_SUCCESS, product });
+			})
+			.catch((error) => {
+				console.log('[createProduduct] error', error);
+				dispatch({ type: actionTypes.CREATE_PRODUCT_ERROR, error });
 			});
 	};
 };

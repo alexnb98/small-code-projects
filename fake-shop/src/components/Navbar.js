@@ -16,6 +16,9 @@ export default function navbar(props) {
 						</NavLink>
 					</div>
 					<div>
+						<NavLink to="/new-product" className="btn btn-light mx-2">
+							Sell Product
+						</NavLink>
 						<NavLink to="/cart" className="btn btn-light mx-2">
 							Cart {numberOfItems}
 						</NavLink>

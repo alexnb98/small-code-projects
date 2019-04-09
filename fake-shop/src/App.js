@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import { connect } from 'react-redux';
 import Login from './containers/login/Login';
 import SignUp from './containers/signup/SignUp';
+import CreateProduct from './containers/CreateProduct/CreateProduct';
 
 class App extends Component {
 	render() {
@@ -17,6 +18,7 @@ class App extends Component {
 					<Switch>
 						<Route path="/login" component={Login} />
 						<Route path="/signup" component={SignUp} />
+						<Route path="/new-product" component={CreateProduct} />
 						<Route path="/product/:id" component={Product} />
 						<Route path="/cart" component={ShopingCart} />
 						<Route path="/" component={Products} />

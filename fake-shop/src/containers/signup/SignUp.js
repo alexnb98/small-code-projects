@@ -6,6 +6,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class SignUp extends Component {
 	state = {
 		email: '',
+		name: '',
 		password: ''
 	};
 
@@ -37,6 +38,17 @@ class SignUp extends Component {
 									type="email"
 									placeholder="Email"
 									id="email"
+									className="form-control"
+								/>
+							</div>
+							<div className="form-group">
+								<label htmlFor="name">name</label>
+								<input
+									onChange={this.onInputChangeHandler}
+									value={this.state.name}
+									type="text"
+									placeholder="name"
+									id="name"
 									className="form-control"
 								/>
 							</div>
