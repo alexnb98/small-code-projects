@@ -4,7 +4,7 @@ import reducer from './reducers/orderReducer';
 import authReducer from './reducers/authReducer';
 import thunk from 'redux-thunk';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
-import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { reduxFirestore, getFirestore, firestoreReducer } from 'redux-firestore';
 import firebaseConfig from '../config/firebaseConfig';
 
 export const loadStateFromLocalStorage = () => {
@@ -32,7 +32,8 @@ const persistedState = loadStateFromLocalStorage();
 
 const rootReducer = combineReducers({
 	orders: reducer,
-	auth: authReducer
+	auth: authReducer,
+	firestore: firestoreReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

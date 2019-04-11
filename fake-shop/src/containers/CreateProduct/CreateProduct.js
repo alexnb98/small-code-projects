@@ -6,7 +6,8 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class CreateProduct extends Component {
 	state = {
 		title: '',
-		description: ''
+		description: '',
+		price: 0
 	};
 
 	inputChangeHandler = (e) => {
@@ -35,6 +36,17 @@ class CreateProduct extends Component {
 									type="text"
 									placeholder="Title"
 									id="title"
+									className="form-control"
+								/>
+							</div>
+							<div className="form-group">
+								<label htmlFor="price">Price</label>
+								<input
+									onChange={this.inputChangeHandler}
+									value={this.state.price}
+									type="number"
+									placeholder="Price"
+									id="price"
 									className="form-control"
 								/>
 							</div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ProductCard from './../components/ProductCard/ProductCard';
 import * as actions from '../store/actions/actions';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
 
 class Products extends Component {
 	componentDidMount() {
@@ -55,4 +57,6 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default compose(connect(mapStateToProps, mapDispatchToProps), firebaseConnect([ { collection: 'products' } ]))(
+	Products
+);
