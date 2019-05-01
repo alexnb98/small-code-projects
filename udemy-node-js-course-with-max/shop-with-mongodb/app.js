@@ -21,10 +21,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
 	User.findById('5cc826f57cc6eb2f4c823446')
 		.then((user) => {
-			req.user = new User(user.name, user.email, user.cart);
+			req.user = new User(user.name, user.email, user.cart, user._id);
 			next();
 		})
-		.catch((error) => console.log(error));
+		.catch((err) => console.log(err));
 });
 
 app.use('/admin', adminRoutes);
@@ -33,6 +33,5 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 mongoConnect(() => {
-	console.log('running...');
 	app.listen(3000);
 });
