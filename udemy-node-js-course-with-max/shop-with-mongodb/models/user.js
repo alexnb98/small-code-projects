@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-	name: {
+	password: {
 		type: String,
 		required: true
 	},
@@ -49,6 +49,11 @@ userSchema.methods.removeFromCart = function(productId) {
 		return item.productId.toString() !== productId.toString();
 	});
 	this.cart = updatedCartItems;
+	return this.save();
+};
+
+userSchema.methods.clearCart = function() {
+	this.cart = { items: [] };
 	return this.save();
 };
 
