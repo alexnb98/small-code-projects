@@ -16,7 +16,9 @@
 	},
 	"scripts": {
 		"start": "node server",
-		"server": "nodemon server"
+		"server": "nodemon server",
+		"client": "npm start --prefix frontend",
+		"dev": "concurrently \"yarn run server\" \"yarn run client\""
 	},
 	"devDependencies": {
 		"concurrently": "^4.1.0",
