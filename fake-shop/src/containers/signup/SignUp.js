@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as authActions from '../../store/actions/authActions';
+// import * as authActions from '../../store/actions/authActions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class SignUp extends Component {
@@ -81,7 +81,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onSignUp: (email, password) => dispatch(authActions.authSignUp(email, password))
+		// onSignUp: (email, password) => dispatch(authActions.authSignUp(email, password))
 	};
 };
 

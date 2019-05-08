@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createProduct } from '../../store/actions/authActions';
+// import { createProduct } from '../../store/actions/authActions';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 class CreateProduct extends Component {
@@ -79,7 +79,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onCreateProduct: (product) => dispatch(createProduct(product))
+		// onCreateProduct: (product) => dispatch(createProduct(product))
 	};
 };
 
