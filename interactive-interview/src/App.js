@@ -13,9 +13,8 @@ class App extends Component {
         this.setState({questions}, () => this.generateRandomIndexes());
     }
 
-    selectQuestion = id => {
+    selectQuestion = index => {
         const questions = [...this.state.questions];
-        const index = questions.findIndex(el => el.id === id);
         const question = questions.splice(index, 1);
         const answers = [...this.state.answers, ...question];
         this.setState({questions, answers}, () => this.generateRandomIndexes());
@@ -40,7 +39,7 @@ class App extends Component {
         if (randomIndexes.length) {
             renderQuestions = randomIndexes.map(i => {
                 return questions[i] ? (
-                    <Paper key={questions[i].id} onClick={() => this.selectQuestion(questions[i].id)} style={{padding: "1rem", marginBottom: "1rem"}}>
+                    <Paper key={questions[i].id} onClick={() => this.selectQuestion(i)} style={{padding: "1rem", marginBottom: "1rem"}}>
                         {questions[i].question}
                     </Paper>
                 ) : null;
